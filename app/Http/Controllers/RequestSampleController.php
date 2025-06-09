@@ -26,4 +26,10 @@ class RequestSampleController extends Controller
     {
         return "category: ". $category. "<br>year: ". $year. "<br>page: ". $request->get("page", 1);
     }
+
+    public function routeLink()
+    {
+        $url = route("profile", ["id" => 1, "photos" => "yes"]);
+        return "プロフィールページのURLは". $url;
+    }
 }
