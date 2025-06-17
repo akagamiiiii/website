@@ -26,16 +26,16 @@ class PhotoController extends Controller
     {
         $savedFilePath = $request->file("image")->store("photos", "public");
         Log::debug($savedFilePath);
+        $fileName = pathinfo($savedFilePath, PATHINFO_BASENAME);
+        Log::debug($fileName);
 
-        return  to_route("photos.create")->with("success", "アップロードしました");
+        return  to_route("photos.show", ["photo" => $fileName])->with("success", "アップロードしました");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //アップロード画像の表示
+    public function show(string $fileName)
     {
-        //
+        return view("photos.show", ["fileName" => $fileName]);
     }
 
     /**
